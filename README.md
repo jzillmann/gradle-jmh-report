@@ -33,7 +33,7 @@ Now every time you execute your jmh benchmarks, the _jmhReport_ task will run at
 
 ## This is how it looks
 
-!(https://cloud.githubusercontent.com/assets/148472/21073653/f9d42102-bee4-11e6-9590-79530c2f8c77.png)
+![screenshot](https://cloud.githubusercontent.com/assets/148472/21073653/f9d42102-bee4-11e6-9590-79530c2f8c77.png)
 
 ## Building the plugin
 - Prepare the project for import into Eclipse: _./gradlew cleanEclipse eclipse_
