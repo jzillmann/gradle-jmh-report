@@ -8,9 +8,10 @@
 **Wanted:**
 - Create a HTML report for multiple benchmark runs 
 - Archive your benchmark results in a structured way
+- Switch to using visualizations from [jmh-visualizer](http://jmh.morethan.io)
 
 ## News
-- 2016/12/xx - 0.1.0 Release
+- 2016/12/10 - 0.1.0 Release
 
 ## Getting Started
 - Setup JMH for your project (However you wanne do it, you can use a [plugin](https://github.com/melix/jmh-gradle-plugin) or a simple [do-it-your-self script](exampleProjects/jmh.gradle). 
@@ -28,6 +29,11 @@ jmhReport {
 }
 tasks.jmh.finalizedBy tasks.jmhReport 
 ```
+Now every time you execute your jmh benchmarks, the _jmhReport_ task will run at the end and point you to the location of the corresponding index.html.
+
+## This is how it looks
+
+!(https://cloud.githubusercontent.com/assets/148472/21073653/f9d42102-bee4-11e6-9590-79530c2f8c77.png)
 
 ## Building the plugin
 - Prepare the project for import into Eclipse: _./gradlew cleanEclipse eclipse_
