@@ -1,0 +1,64 @@
+plugins {
+    id 'com.zoltu.kotlin' version '1.0.1-2'
+}
+
+apply plugin: "kotlin"
+apply plugin: 'eclipse'
+
+sourceCompatibility=1.7
+targetCompatibility=1.7
+
+repositories {
+    jcenter()
+    maven { url("http://repository.jetbrains.com/all") } //for spek
+}
+
+
+dependencies {
+    compile(gradleApi())
+    compile(group: 'org.jetbrains.kotlin', name: 'kotlin-stdlib', version: '1.0.1-2')
+    compile group: 'org.jetbrains.kotlinx', name: 'kotlinx.html.jvm', version: '0.5.10'
+    compile 'com.beust:klaxon:0.24'
+
+    testCompile(group: 'org.jetbrains.spek', name: 'spek', version: '1.0.9')
+    testCompile 'junit:junit:4.12'
+    testCompile 'org.assertj:assertj-core:2.3.0'
+}
+
+
+import org.gradle.plugins.ide.eclipse.model.*
+eclipse {
+    project {
+        buildCommand  'org.jetbrains.kotlin.ui.kotlinBuilder' 
+        natures 'org.jetbrains.kotlin.core.kotlinNature'
+        linkedResource ( 
+            name:  'kotlin_bin' , 
+            type:  '2' , 
+            locationUri :  "org.jetbrains.kotlin.core.filesystem:/${project.name}/kotlin_bin" 
+        ) 
+    }
+    classpath {
+        containers  'org.jetbrains.kotlin.core.KOTLIN_CONTAINER' 
+        file {
+            whenMerged {Classpath cp ->
+                String gradleHome = gradle.getGradleHomeDir().absolutePath.replace(File.separator, '/')
+                println "Referencing for sources: $gradleHome" 
+                String gradleSrc = "${gradleHome}/src"
+                cp.entries.each {ClasspathEntry entry ->
+                    if ((entry in AbstractLibrary) && (entry.library.file.name.startsWith('gradle-'))) {
+                        def matcher = entry.library.file.name =~ "gradle-(.*)-(.*)"
+                        String sourcePath= gradleSrc + '/' + matcher[0][1];
+                        entry.sourcePath = new org.gradle.plugins.ide.eclipse.model.internal.FileReferenceFactory().fromPath(sourcePath)
+                    }
+                }
+            }
+        }
+    }
+}
+
+// special wrapper setup for having the sources in eclipse
+task wrapper(type: Wrapper) {
+    gradleVersion = '2.14.1'
+    distributionUrl = "http://services.gradle.org/distributions/gradle-${gradleVersion}-all.zip"
+}
+
