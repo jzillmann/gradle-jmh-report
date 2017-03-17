@@ -48,12 +48,10 @@ public abstract class SizingReadBenchmark {
     private static final int DEFAULT_LOW_LEVEL_CONSUME_SIZE = 4096;
 
     private static final TestFile _testFile = TestFile.ONE_GB;
-    private FileStore _fileStore;
 
     @Setup
     public void setUp() throws IOException {
-        _fileStore = createFileStore();
-        _testFile.create(_fileStore);
+        _testFile.init(createFileStore());
     }
 
     protected abstract FileStore createFileStore();
@@ -119,7 +117,7 @@ public abstract class SizingReadBenchmark {
     private String readFile(ByteBuffer byteBuffer, int consumeBytesChunk) throws IOException {
         Hasher hasher = Hashing.crc32().newHasher();
         byte[] bytes = new byte[consumeBytesChunk];
-        try (ReadableByteChannel channel = _testFile.open(_fileStore);) {
+        try (ReadableByteChannel channel = _testFile.open();) {
             while (channel.read(byteBuffer) > 0) {
                 byteBuffer.flip();
                 while (byteBuffer.hasRemaining()) {

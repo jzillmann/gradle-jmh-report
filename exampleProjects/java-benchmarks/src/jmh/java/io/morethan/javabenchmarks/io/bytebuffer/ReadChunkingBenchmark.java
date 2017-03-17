@@ -25,7 +25,6 @@ import com.google.common.hash.Hashing;
 import com.google.common.primitives.Ints;
 import com.jakewharton.byteunits.BinaryByteUnit;
 
-import io.morethan.javabenchmarks.FileStore;
 import io.morethan.javabenchmarks.LocalFileStore;
 import io.morethan.javabenchmarks.TestFile;
 
@@ -43,14 +42,13 @@ public class ReadChunkingBenchmark {
 
     private static final TestFile _testFile = TestFile.ONE_GB;
     private static final int _chunkSize = Ints.checkedCast(BinaryByteUnit.MEBIBYTES.toBytes(10));
-    private FileStore _fileStore = LocalFileStore.INSTANCE;
 
     private ByteBuffer _chunkBuffer = ByteBuffer.allocateDirect(_chunkSize);
     private List<ByteBuffer> _standardSizedBuffers = new ArrayList<>();
 
     @Setup
     public void setUp() throws IOException {
-        _testFile.create(_fileStore);
+        _testFile.init(LocalFileStore.INSTANCE);
         for (int i = 0; i < _chunkSize / 64 / 1024; i++) {
             _standardSizedBuffers.add(ByteBuffer.allocateDirect(64 * 1024));
         }
@@ -61,7 +59,7 @@ public class ReadChunkingBenchmark {
         long consumedBytes = 0;
         byte[] bytes = new byte[4096];
         Hasher hasher = Hashing.crc32().newHasher();
-        try (ReadableByteChannel byteChannel = _testFile.open(_fileStore);) {
+        try (ReadableByteChannel byteChannel = _testFile.open();) {
             while (byteChannel.read(_chunkBuffer) > 0) {
                 _chunkBuffer.flip();
                 while (_chunkBuffer.hasRemaining()) {
@@ -83,7 +81,7 @@ public class ReadChunkingBenchmark {
         byte[] bytes = new byte[4096];
         Hasher hasher = Hashing.crc32().newHasher();
 
-        try (ReadableByteChannel byteChannel = _testFile.open(_fileStore);) {
+        try (ReadableByteChannel byteChannel = _testFile.open();) {
             int lastReadBytes = 0;
             do {
                 // read the whole chunk in chunks

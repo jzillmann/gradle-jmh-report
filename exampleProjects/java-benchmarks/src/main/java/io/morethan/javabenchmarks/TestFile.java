@@ -6,6 +6,7 @@ import java.io.IOException;
 import java.io.OutputStream;
 import java.nio.channels.ReadableByteChannel;
 
+import com.google.common.base.Preconditions;
 import com.google.common.base.Stopwatch;
 import com.jakewharton.byteunits.BinaryByteUnit;
 
@@ -14,32 +15,39 @@ import com.jakewharton.byteunits.BinaryByteUnit;
  */
 public class TestFile {
 
-    public static TestFile ONE_GB = new TestFile("oneGB-randomBytes", FileFiller.randomBytes(BinaryByteUnit.GIBIBYTES.toBytes(1)));
+    public static TestFile ONE_GB = TestFile.create("oneGB-randomBytes", FileFiller.randomBytes(BinaryByteUnit.GIBIBYTES.toBytes(1)));
 
     private final String _path;
     private final FileFiller _filler;
+    private FileStore _fileStore;
 
-    public TestFile(String name, FileFiller filler) {
+    private TestFile(String name, FileFiller filler) {
         _path = "build/files/" + name + ".file";
         _filler = filler;
     }
 
-    public void create(FileStore fileSource) throws IOException {
-        if (fileSource.exists(_path)) {
-            System.out.println("Using existing file " + _path + " with size of " + BinaryByteUnit.format(fileSource.length(_path)));
+    public static TestFile create(String name, FileFiller fileFiller) {
+        return new TestFile(name, fileFiller);
+    }
+
+    public void init(FileStore fileStore) throws IOException {
+        _fileStore = fileStore;
+        if (fileStore.exists(_path)) {
+            System.out.println("Using existing file " + _path + " with size of " + BinaryByteUnit.format(fileStore.length(_path)));
         } else {
             Stopwatch stopwatch = Stopwatch.createStarted();
-            try (OutputStream out = new BufferedOutputStream(fileSource.create(_path))) {
+            try (OutputStream out = new BufferedOutputStream(fileStore.create(_path))) {
                 _filler.fill(out);
             } catch (IOException x) {
                 throw new RuntimeException(x);
             }
-            System.out.println("Wrote file " + _path + " with size of " + BinaryByteUnit.format(fileSource.length(_path)) + " in " + stopwatch);
+            System.out.println("Wrote file " + _path + " with size of " + BinaryByteUnit.format(fileStore.length(_path)) + " in " + stopwatch);
         }
     }
 
-    public ReadableByteChannel open(FileStore fileStore) throws IOException {
-        return fileStore.open(_path);
+    public ReadableByteChannel open() throws IOException {
+        Preconditions.checkState(_fileStore != null, "Call init() first!");
+        return _fileStore.open(_path);
     }
 
 }
