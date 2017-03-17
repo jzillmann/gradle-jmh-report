@@ -34,6 +34,9 @@ repositories {
 
 dependencies {
     compile group: 'com.google.guava', name: 'guava', version: '19.0'
+    compile group: 'com.jakewharton.byteunits', name: 'byteunits', version:'0.9.1'
+    compile group: 'org.apache.hadoop', name: 'hadoop-common', version: '2.6.0'
+    compile group: 'org.apache.hadoop', name: 'hadoop-hdfs', version: '2.6.0'
     testCompile 'junit:junit:4.12'
     testCompile 'org.assertj:assertj-core:2.3.0'
 }
