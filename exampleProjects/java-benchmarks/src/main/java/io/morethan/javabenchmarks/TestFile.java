@@ -15,7 +15,8 @@ import com.jakewharton.byteunits.BinaryByteUnit;
  */
 public class TestFile {
 
-    public static TestFile ONE_GB = TestFile.create("oneGB-randomBytes", FileFiller.randomBytes(BinaryByteUnit.GIBIBYTES.toBytes(1)));
+    public static TestFile ONE_GB_RANDOM_BYTES = TestFile.create("oneGB-randomBytes", FileFiller.randomBytes(BinaryByteUnit.GIBIBYTES.toBytes(1)));
+    public static TestFile ONE_GB_LONGS = TestFile.create("oneGB-ascendingLongs", FileFiller.ascendingLong(BinaryByteUnit.GIBIBYTES.toBytes(1) / 8));
 
     private final String _path;
     private final FileFiller _filler;

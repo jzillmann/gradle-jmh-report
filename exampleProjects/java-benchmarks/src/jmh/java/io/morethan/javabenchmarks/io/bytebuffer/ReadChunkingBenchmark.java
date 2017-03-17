@@ -40,7 +40,7 @@ import io.morethan.javabenchmarks.TestFile;
 @OutputTimeUnit(TimeUnit.MILLISECONDS)
 public class ReadChunkingBenchmark {
 
-    private static final TestFile _testFile = TestFile.ONE_GB;
+    private static final TestFile _testFile = TestFile.ONE_GB_RANDOM_BYTES;
     private static final int _chunkSize = Ints.checkedCast(BinaryByteUnit.MEBIBYTES.toBytes(10));
 
     private ByteBuffer _chunkBuffer = ByteBuffer.allocateDirect(_chunkSize);

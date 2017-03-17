@@ -1,5 +1,6 @@
 package io.morethan.javabenchmarks;
 
+import java.io.DataOutputStream;
 import java.io.IOException;
 import java.io.OutputStream;
 import java.util.Random;
@@ -20,6 +21,18 @@ public abstract class FileFiller {
                 }
             }
         };
+    }
 
+    public static FileFiller ascendingLong(final long howMany) {
+        return new FileFiller() {
+            @Override
+            public void fill(OutputStream outputStream) throws IOException {
+                try (DataOutputStream dataOutputStream = new DataOutputStream(outputStream);) {
+                    for (int i = 0; i < howMany; i++) {
+                        dataOutputStream.writeLong(i);
+                    }
+                }
+            }
+        };
     }
 }

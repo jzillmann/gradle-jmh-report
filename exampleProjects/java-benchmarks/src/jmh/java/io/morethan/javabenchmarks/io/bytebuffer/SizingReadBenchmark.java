@@ -47,7 +47,7 @@ public abstract class SizingReadBenchmark {
 
     private static final int DEFAULT_LOW_LEVEL_CONSUME_SIZE = 4096;
 
-    private static final TestFile _testFile = TestFile.ONE_GB;
+    private static final TestFile _testFile = TestFile.ONE_GB_RANDOM_BYTES;
 
     @Setup
     public void setUp() throws IOException {
