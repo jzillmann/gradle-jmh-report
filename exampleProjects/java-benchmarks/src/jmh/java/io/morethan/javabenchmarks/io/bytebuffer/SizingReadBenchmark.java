@@ -34,7 +34,7 @@ import io.morethan.javabenchmarks.TestFile;
  * <li>Direct is faster then Heap</li>
  * <li>65.536 seems to be the sweet spot</li>
  * <li>Small sizes like 23 are unbearable slow</li>
- * <li>Big sizes above 1 mio are not too bad, but are usually slower then regualar sizes</li>
+ * <li>Big sizes above 1 mio are not too bad, but are usually slower then regular sizes</li>
  * </ul>
  */
 @Fork(value = 2)

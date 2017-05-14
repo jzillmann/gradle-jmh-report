@@ -1,6 +1,7 @@
 package io.morethan.javabenchmarks;
 
 import java.io.IOException;
+import java.io.InputStream;
 import java.io.OutputStream;
 import java.nio.ByteBuffer;
 import java.nio.channels.ReadableByteChannel;
@@ -14,7 +15,7 @@ public class HdfsFileStore implements FileStore {
 
     private final FileSystem _fileSystem;
 
-    public HdfsFileStore(FileSystem fileSystem) {
+    private HdfsFileStore(FileSystem fileSystem) {
         _fileSystem = fileSystem;
     }
 
@@ -58,6 +59,11 @@ public class HdfsFileStore implements FileStore {
                 return inputStream.read(dst);
             }
         };
+    }
+
+    @Override
+    public InputStream openAsStream(String pathString) throws IOException {
+        return _fileSystem.open(new Path(pathString));
     }
 
     @Override

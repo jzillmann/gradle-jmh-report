@@ -43,6 +43,16 @@ public class ReadLongBenchmark {
     }
 
     @Benchmark
+    public void getLong_reverse() {
+        _byteBuffer.order(ByteOrder.BIG_ENDIAN);
+        for (int i = 0; i < _byteBuffer.capacity() / 8; i++) {
+            long value = Long.reverseBytes(_byteBuffer.getLong());
+            assertThat(value).isEqualTo(i);
+        }
+        _byteBuffer.rewind();
+    }
+
+    @Benchmark
     public void getLongWithIndex() {
         for (int i = 0; i < _byteBuffer.capacity() / 8; i++) {
             long value = _byteBuffer.getLong(i * 8);
@@ -52,7 +62,7 @@ public class ReadLongBenchmark {
     }
 
     @Benchmark
-    public void asLongBuffer() {
+    public void longBuffer() {
         LongBuffer longBuffer = _byteBuffer.asLongBuffer();
         for (int i = 0; i < _byteBuffer.capacity() / 8; i++) {
             long value = longBuffer.get();
@@ -62,7 +72,7 @@ public class ReadLongBenchmark {
     }
 
     @Benchmark
-    public void throughBytesArray() {
+    public void oneBytesArray() {
         byte[] bytes = new byte[_byteBuffer.remaining()];
         _byteBuffer.get(bytes);
         for (int i = 0; i < bytes.length / 8; i++) {
@@ -75,6 +85,24 @@ public class ReadLongBenchmark {
                     ((bytes[offset + 2] & 255) << 16) +
                     ((bytes[offset + 1] & 255) << 8) +
                     ((bytes[offset + 0] & 255) << 0));
+            assertThat(value).isEqualTo(i);
+        }
+        _byteBuffer.rewind();
+    }
+
+    @Benchmark
+    public void chunkedBytesArray() {
+        byte[] longChunk = new byte[8];
+        for (int i = 0; i < _byteBuffer.capacity() / 8; i++) {
+            _byteBuffer.get(longChunk);
+            long value = (((long) longChunk[7] << 56) +
+                    ((long) (longChunk[6] & 255) << 48) +
+                    ((long) (longChunk[5] & 255) << 40) +
+                    ((long) (longChunk[4] & 255) << 32) +
+                    ((long) (longChunk[3] & 255) << 24) +
+                    ((longChunk[2] & 255) << 16) +
+                    ((longChunk[1] & 255) << 8) +
+                    ((longChunk[0] & 255) << 0));
             assertThat(value).isEqualTo(i);
         }
         _byteBuffer.rewind();

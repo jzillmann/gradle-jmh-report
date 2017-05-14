@@ -3,6 +3,7 @@ package io.morethan.javabenchmarks;
 import java.io.BufferedOutputStream;
 import java.io.File;
 import java.io.IOException;
+import java.io.InputStream;
 import java.io.OutputStream;
 import java.nio.channels.ReadableByteChannel;
 
@@ -49,6 +50,11 @@ public class TestFile {
     public ReadableByteChannel open() throws IOException {
         Preconditions.checkState(_fileStore != null, "Call init() first!");
         return _fileStore.open(_path);
+    }
+
+    public InputStream openAsStream() throws IOException {
+        Preconditions.checkState(_fileStore != null, "Call init() first!");
+        return _fileStore.openAsStream(_path);
     }
 
 }

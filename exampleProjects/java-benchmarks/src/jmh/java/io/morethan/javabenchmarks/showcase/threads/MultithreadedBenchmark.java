@@ -1,4 +1,4 @@
-package io.morethan.javabenchmarks.showcase;
+package io.morethan.javabenchmarks.showcase.threads;
 
 import java.util.concurrent.TimeUnit;
 import java.util.concurrent.atomic.AtomicLong;
@@ -26,35 +26,27 @@ import org.openjdk.jmh.annotations.Warmup;
 @State(Scope.Group)
 public class MultithreadedBenchmark {
 
-    private static final int MAX_VALUE = 1_000_000;
     AtomicLong _counter = new AtomicLong();
 
     @Group("withThreads1")
     @GroupThreads(1)
     @Benchmark
     public void withThreads1() throws Exception {
-        if (_counter.get() < MAX_VALUE) {
-            _counter.incrementAndGet();
-        }
+        _counter.incrementAndGet();
     }
 
     @Group("withThreads2")
     @GroupThreads(2)
     @Benchmark
     public void withThreads2() throws Exception {
-        if (_counter.get() < MAX_VALUE) {
-            _counter.incrementAndGet();
-        }
+        _counter.incrementAndGet();
     }
 
     @Group("withThreads4")
     @GroupThreads(4)
     @Benchmark
     public void withThreads4() throws Exception {
-        if (_counter.get() < MAX_VALUE) {
-            _counter.incrementAndGet();
-        }
-
+        _counter.incrementAndGet();
     }
 
 }

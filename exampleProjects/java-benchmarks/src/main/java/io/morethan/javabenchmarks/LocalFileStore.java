@@ -1,6 +1,7 @@
 package io.morethan.javabenchmarks;
 
 import java.io.IOException;
+import java.io.InputStream;
 import java.io.OutputStream;
 import java.nio.channels.ReadableByteChannel;
 import java.nio.file.Files;
@@ -28,6 +29,11 @@ public class LocalFileStore implements FileStore {
     @Override
     public ReadableByteChannel open(String pathString) throws IOException {
         return Files.newByteChannel(Paths.get(pathString), EnumSet.of(StandardOpenOption.READ));
+    }
+
+    @Override
+    public InputStream openAsStream(String pathString) throws IOException {
+        return Files.newInputStream(Paths.get(pathString), StandardOpenOption.READ);
     }
 
     @Override
