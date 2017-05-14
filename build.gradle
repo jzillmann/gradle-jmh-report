@@ -10,7 +10,7 @@ buildscript {
 }
 
 plugins {
-    id 'com.zoltu.kotlin' version '1.0.1-2'
+    id 'org.jetbrains.kotlin.jvm' version '1.1.2-2'
 }
 
 apply plugin: 'com.gradle.plugin-publish'
@@ -30,9 +30,7 @@ targetCompatibility=1.7
 
 dependencies {
     compile(gradleApi())
-    compile(group: 'org.jetbrains.kotlin', name: 'kotlin-stdlib', version: '1.0.1-2')
-    compile group: 'org.jetbrains.kotlinx', name: 'kotlinx.html.jvm', version: '0.5.10'
-    compile 'com.beust:klaxon:0.24'
+    compile(group: 'org.jetbrains.kotlin', name: 'kotlin-stdlib', version: '1.1.2-3')
 
     testCompile(group: 'org.jetbrains.spek', name: 'spek', version: '1.0.9')
     testCompile 'junit:junit:4.12'
@@ -48,7 +46,7 @@ eclipse {
         linkedResource ( 
             name:  'kotlin_bin' , 
             type:  '2' , 
-            locationUri :  "org.jetbrains.kotlin.core.filesystem:/${project.name}/kotlin_bin" 
+            locationUri :  'org.jetbrains.kotlin.core.filesystem:/'+project.name+'/kotlin_bin' 
         ) 
     }
     classpath {
@@ -86,7 +84,7 @@ pluginBundle {
 
 // special wrapper setup for having the sources in eclipse
 task wrapper(type: Wrapper) {
-    gradleVersion = '2.14.1'
+    gradleVersion = '3.5'
     distributionUrl = "http://services.gradle.org/distributions/gradle-${gradleVersion}-all.zip"
 }
 

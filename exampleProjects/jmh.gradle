@@ -22,37 +22,39 @@ eclipse {
     }
 }
 
-task ('jmhHelp', description:'Print help for the jmh task', group: 'Development') << {
-    println ""
-    println "Usage of jmh tasks:"
-    println "~~~~~~~~~~~~~~~~~~~~~~~~~~~"
-    
-    println "Only execute specific benchmark(s):"
-    println "\tgw jmh -Pinclude=\".*MyBenchmark.*\""
-    
-    println ""
-    println "Specify extra profilers:"
-    println "\tgw jmh -Pprofilers=\"gc,stack\""
-    
-    println ""
-    println "Prominent profilers:"
-    println "\tcomp - JitCompilations, tune your iterations"
-    println "\tstack - which methods used most time"
-    println "\tgc - print garbage collection stats"
-    println "\ths_thr - thread usage"
-    
-    println ""
-    println "Change report format from JSON to one of [CSV, JSON, NONE, SCSV, TEXT]:"
-    println "\tgw jmh -Pformat=csv"
-    
-    println ""
-    println "Specify JVM arguments:"
-    println "\tgw jmh -PjvmArgs=\"-Dtest.cluster=local\""
-    
-    println ""
-    println "Resources:"
-    println "\thttp://tutorials.jenkov.com/java-performance/jmh.html (Introduction)"
-    println "\thttp://hg.openjdk.java.net/code-tools/jmh/file/tip/jmh-samples/src/main/java/org/openjdk/jmh/samples/ (Samples)"
+task ('jmhHelp', description:'Print help for the jmh task', group: 'Development') {
+    doLast {
+        println ""
+        println "Usage of jmh tasks:"
+        println "~~~~~~~~~~~~~~~~~~~~~~~~~~~"
+        
+        println "Only execute specific benchmark(s):"
+        println "\tgw jmh -Pinclude=\".*MyBenchmark.*\""
+        
+        println ""
+        println "Specify extra profilers:"
+        println "\tgw jmh -Pprofilers=\"gc,stack\""
+        
+        println ""
+        println "Prominent profilers:"
+        println "\tcomp - JitCompilations, tune your iterations"
+        println "\tstack - which methods used most time"
+        println "\tgc - print garbage collection stats"
+        println "\ths_thr - thread usage"
+        
+        println ""
+        println "Change report format from JSON to one of [CSV, JSON, NONE, SCSV, TEXT]:"
+        println "\tgw jmh -Pformat=csv"
+        
+        println ""
+        println "Specify JVM arguments:"
+        println "\tgw jmh -PjvmArgs=\"-Dtest.cluster=local\""
+        
+        println ""
+        println "Resources:"
+        println "\thttp://tutorials.jenkov.com/java-performance/jmh.html (Introduction)"
+        println "\thttp://hg.openjdk.java.net/code-tools/jmh/file/tip/jmh-samples/src/main/java/org/openjdk/jmh/samples/ (Samples)"
+    }
 }
 
 task jmh(type: JavaExec, description: 'Executing JMH benchmarks', group:'Development') {

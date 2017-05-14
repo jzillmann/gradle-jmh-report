@@ -29,7 +29,7 @@ public class JmhReportPlugin : Plugin<Project> {
 
     override fun apply(project: Project?) {
         extension = project!!.extensions.create(EXTENSION, JmhReportExtension::class.java);
-        project.tasks.create("jmhReport", JmhReportTask::class.java)
+        project.tasks.create("jmhReport", JmhReportTask::class.java).description = "Create an HTML report for the latest JMH results.";
     }
 
 }

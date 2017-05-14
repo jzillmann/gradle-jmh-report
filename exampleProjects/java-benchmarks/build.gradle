@@ -9,11 +9,10 @@ buildscript {
         }
     }
     dependencies {
-        classpath 'io.morethan:gradle-jmh-report:'
+        classpath 'io.morethan:gradle-jmh-report:0.1.0'
         
         //transitive dependencies since we grep the plugin from build/libs
-        classpath(group: 'org.jetbrains.kotlin', name: 'kotlin-stdlib', version: '1.0.1-2')
-        classpath(group: 'org.jetbrains.kotlinx', name: 'kotlinx.html.jvm', version: '0.5.10') 
+        classpath(group: 'org.jetbrains.kotlin', name: 'kotlin-stdlib', version: '1.1.2-3')
         classpath(group: 'com.beust', name: 'klaxon', version: '0.24')
     }
 }
