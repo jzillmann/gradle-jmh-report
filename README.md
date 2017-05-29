@@ -4,8 +4,10 @@
 
 ## News
 
-- 2016/12/10 - 0.1.0 Release
+- 2017/05/30 - 0.4.0 Release - On pair with jmh-visualizer-0.4 / Report on secondary metrics
 - 2017/05/14 - 0.2.0 Release - Integrate https://github.com/jzillmann/jmh-visualizer
+- 2016/12/10 - 0.1.0 Release
+
 
 
 ## Features
@@ -22,7 +24,7 @@
 - Add the plugin:
 ```
 plugins {
-  id "io.morethan.jmhreport" version "0.2.0"
+  id "io.morethan.jmhreport" version "0.4.0"
 }
 ```
 - Configure the plugin:
@@ -45,7 +47,8 @@ Now every time you execute your jmh benchmarks, the _jmhReport_ task will run at
 - Prepare the project for import into Eclipse: _./gradlew cleanEclipse eclipse_
 - Execute the examples: _./gradlew jar ;./gradlew -p exampleProjects/java-benchmarks/ jmh_
 - How to publish the Gradle plugin:
-  - increase version in _gradle.properties_
-  - update _News_ and _Getting Started_ in _README.md_
-  - update reference in for example projects
-  - execute: _./gradlew publishPlugins_
+  - Increase version in _gradle.properties_
+  - Update _News_ and _Getting Started_ in _README.md_
+  - Update version number of in build.gradle for all example projects
+  - Commit & Push
+  - Execute: _./gradlew publishPlugins_

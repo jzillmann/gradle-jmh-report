@@ -14,7 +14,6 @@ import org.openjdk.jmh.annotations.Warmup;
  * Benchmark with different {@link BenchmarkMode}s to show that its possible.
  */
 @Fork(value = 1)
-
 @OutputTimeUnit(TimeUnit.MILLISECONDS)
 public class MixedBenchmark {
 
