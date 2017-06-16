@@ -26,27 +26,48 @@ import org.openjdk.jmh.annotations.Warmup;
 @State(Scope.Group)
 public class MultithreadedBenchmark {
 
-    AtomicLong _counter = new AtomicLong();
+    private AtomicLong _counter = new AtomicLong();
 
-    @Group("withThreads1")
+    @Group("with1Thread")
     @GroupThreads(1)
     @Benchmark
-    public void withThreads1() throws Exception {
+    public void increment1() throws Exception {
         _counter.incrementAndGet();
     }
 
-    @Group("withThreads2")
+    @Group("with1Thread")
+    @GroupThreads(1)
+    @Benchmark
+    public long read1() throws Exception {
+        return _counter.get();
+    }
+
+    @Group("with2Threads")
     @GroupThreads(2)
     @Benchmark
-    public void withThreads2() throws Exception {
+    public void increment2() throws Exception {
         _counter.incrementAndGet();
     }
 
-    @Group("withThreads4")
+    @Group("with2Threads")
+    @GroupThreads(2)
+    @Benchmark
+    public long read2() throws Exception {
+        return _counter.get();
+    }
+
+    @Group("with4Threads")
     @GroupThreads(4)
     @Benchmark
-    public void withThreads4() throws Exception {
+    public void increment4() throws Exception {
         _counter.incrementAndGet();
+    }
+
+    @Group("with4Threads")
+    @GroupThreads(4)
+    @Benchmark
+    public long read4() throws Exception {
+        return _counter.get();
     }
 
 }
