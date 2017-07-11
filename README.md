@@ -24,7 +24,7 @@
 - Add the plugin:
 ```
 plugins {
-  id "io.morethan.jmhreport" version "0.4.1"
+  id "io.morethan.jmhreport" version "0.4.2"
 }
 ```
 - Configure the plugin:
@@ -53,6 +53,6 @@ Now every time you execute your jmh benchmarks, the _jmhReport_ task will run at
   - Increase version in _gradle.properties_
   - Update _News_ and _Getting Started_ in _README.md_
   - Update version number of in build.gradle for all example projects
-  - Test report: gw jar ;gw  jmh -p exampleProjects/java-benchmarks/ -Pinclude=".*QuickBenchmark.*"
+  - Test report: ```gw jar ;gw  jmh -p exampleProjects/java-benchmarks/ -Pinclude=".*QuickBenchmark.*"```
   - Commit & Push
   - Execute: _./gradlew publishPlugins_
