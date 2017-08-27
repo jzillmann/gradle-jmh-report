@@ -37,9 +37,10 @@ jmhReport {
     jmhResultPath = project.file('build/reports/jmh/result.json')
     jmhReportOutput = project.file('build/reports/jmh')
 }
-tasks.jmh.finalizedBy tasks.jmhReport 
 ```
-Now every time you execute your jmh benchmarks, the _jmhReport_ task will run at the end and point you to the location of the corresponding index.html.
+- Build the report
+  - Given you havebenchmarks have been executed and the json result file is present, you can execute ```./gradlew jmhReport``` which will build the html report.
+  - You can setup a finalizer hook as well: ```tasks.jmh.finalizedBy tasks.jmhReport```. With this, every time you execute your jmh benchmarks, e.g. with _./gradlew jmh_, the _jmhReport_ task will run at the end.
 
 
 ## This is how it looks
