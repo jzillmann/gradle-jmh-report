@@ -7,6 +7,7 @@
 
 ## News
 
+- 2017/09/04 - 0.6.0 Release - On pair with jmh-visualizer-0.6 / Layout Change
 - 2017/07/30 - 0.5.0 Release - On pair with jmh-visualizer-0.5 / Focusing on Benchmarks
 - 2017/05/30 - 0.4.0 Release - On pair with jmh-visualizer-0.4 / Report on secondary metrics
 - 2017/05/14 - 0.2.0 Release - Integrate https://github.com/jzillmann/jmh-visualizer
@@ -28,7 +29,7 @@
 - Add the plugin:
 ```
 plugins {
-  id "io.morethan.jmhreport" version "0.5.0"
+  id "io.morethan.jmhreport" version "0.6.0"
 }
 ```
 - Configure the plugin:

@@ -71,7 +71,7 @@ eclipse {
 pluginBundle {
   website = 'https://github.com/jzillmann/gradle-jmh-report'
   vcsUrl = 'https://github.com/jzillmann/gradle-jmh-report'
-  description = 'A Gradle plugin building a visual report for JMH benchmarks!'
+  description = 'A Gradle plugin building a visual report for your JMH benchmarks!'
   tags = ['jmh', 'report', 'visualization']
 
   plugins {
