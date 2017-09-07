@@ -43,6 +43,15 @@ jmhReport {
   - Given you havebenchmarks have been executed and the json result file is present, you can execute ```./gradlew jmhReport``` which will build the html report.
   - You can setup a finalizer hook as well: ```tasks.jmh.finalizedBy tasks.jmhReport```. With this, every time you execute your jmh benchmarks, e.g. with _./gradlew jmh_, the _jmhReport_ task will run at the end.
 
+- Build the report without the `jmh-gradle-plugin` plugin
+```
+task runJMH(type: JavaExec) {
+  // e.g. http://hg.openjdk.java.net/code-tools/jmh/file/a128fd4a5901/jmh-samples/src/main/java/org/openjdk/jmh/samples/JMHSample_01_HelloWorld.java 
+  main = "org.openjdk.jmh.samples.JMHSample_01_HelloWorld "
+  classpath sourceSets.test.runtimeClasspath
+}
+tasks.runJMH.finalizedBy tasks.jmhReport
+```
 
 ## This is how it looks
 
