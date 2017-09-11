@@ -29,7 +29,7 @@
 - Add the plugin:
 ```
 plugins {
-  id "io.morethan.jmhreport" version "0.6.1"
+  id "io.morethan.jmhreport" version "0.6.2"
 }
 ```
 - Configure the plugin:
@@ -40,7 +40,7 @@ jmhReport {
 }
 ```
 - Build the report
-  - Given you havebenchmarks have been executed and the json result file is present, you can execute ```./gradlew jmhReport``` which will build the html report.
+  - Given your benchmarks have been executed and the json result file is present, you can execute ```./gradlew jmhReport``` which will build the html report.
   - You can setup a finalizer hook as well: ```tasks.jmh.finalizedBy tasks.jmhReport```. With this, every time you execute your jmh benchmarks, e.g. with _./gradlew jmh_, the _jmhReport_ task will run at the end.
 
 
@@ -61,4 +61,7 @@ jmhReport {
   - Update version number of in build.gradle for all example projects
   - Test report: ```gw jar ;gw  jmh -p exampleProjects/java-benchmarks/ -Pinclude=".*QuickBenchmark.*"```
   - Commit & Push
+  - tag with
+    - _git tag -a $releaseVersion -m "$releaseVersion release"_
+    - _git push --tags_
   - Execute: _./gradlew publishPlugins_
