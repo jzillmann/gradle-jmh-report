@@ -29,7 +29,7 @@
 - Add the plugin:
 ```
 plugins {
-  id "io.morethan.jmhreport" version "0.6.2"
+  id "io.morethan.jmhreport" version "0.6.2.1"
 }
 ```
 - Configure the plugin:
