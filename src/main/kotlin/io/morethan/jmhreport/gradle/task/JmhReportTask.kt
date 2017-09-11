@@ -55,7 +55,7 @@ open class JmhReportTask : DefaultTask() {
             writer.println("var providedBenchmarks = ['${runName}'];")
             writer.println();
             writer.println("var providedBenchmarkStore = {");
-            writer.println("${runName}: ");
+            writer.println("'${runName}': ");
             reportFile.forEachLine() { line -> writer.println(line) }
             writer.println("};");
         }
