@@ -2,7 +2,7 @@
 
 **_gradle-jmh-report_** is a [Gradle](http://gradle.org) plugin to manage and visualize the result of your [JMH](http://openjdk.java.net/projects/code-tools/jmh/) benchmarks.
 
-*Note:* This plugin is not for executing benchmarks, its for reporting on already executed benchmarks. There are multiple ways how you can setup your JMH benchmark execution in Gradle, i've written in this [blog post](https://blog.morethan.io/jmh-with-gradle-from-easy-to-simple-dc872d57cf7f) about it!
+**Note:** **This plugin is not for executing benchmarks**, its for reporting on already executed benchmarks. There are multiple ways how you can setup your JMH benchmark execution in Gradle, i've written in this [blog post](https://blog.morethan.io/jmh-with-gradle-from-easy-to-simple-dc872d57cf7f) about it!
 
 
 ## News
