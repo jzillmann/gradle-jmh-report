@@ -1,0 +1,77 @@
+// Execute with ./gradlew jar; ./gradlew -p exampleProjects/kotlin-benchmarks/
+
+buildscript {
+
+    ext.kotlin_version = '1.1.3'
+    
+    repositories {
+        jcenter()
+        flatDir {
+            dirs file('../../build/libs').absolutePath
+        }
+    }
+    dependencies {
+        classpath 'io.morethan:gradle-jmh-report:0.7.0'
+        classpath "org.jetbrains.kotlin:kotlin-gradle-plugin:$kotlin_version"
+        
+        //transitive dependencies since we grep the plugin from build/libs
+        classpath(group: 'org.jetbrains.kotlin', name: 'kotlin-stdlib', version: "$kotlin_version")
+        classpath(group: 'com.beust', name: 'klaxon', version: '0.24')
+    }
+}
+
+
+apply plugin: 'kotlin'
+apply plugin: 'kotlin-kapt'
+apply plugin: 'eclipse'
+apply plugin: 'io.morethan.jmhreport'
+
+apply from: rootProject.file('../jmh.gradle')
+
+sourceCompatibility = 1.8
+targetCompatibility = 1.8
+
+repositories {
+    jcenter()
+}
+
+dependencies {
+    compile group: 'com.google.guava', name: 'guava', version: '19.0'
+    compile(group: 'org.jetbrains.kotlin', name: 'kotlin-stdlib', version: "$kotlin_version")
+
+    kaptJmh 'org.openjdk.jmh:jmh-generator-annprocess:1.18'
+    
+    testCompile 'junit:junit:4.12'
+    testCompile 'org.assertj:assertj-core:2.3.0'
+}
+
+eclipse {
+    project {
+        buildCommand  'org.jetbrains.kotlin.ui.kotlinBuilder' 
+        natures 'org.jetbrains.kotlin.core.kotlinNature'
+        linkedResource ( 
+            name:  'kotlin_bin' , 
+            type:  '2' , 
+            locationUri :  'org.jetbrains.kotlin.core.filesystem:/'+project.name+'/kotlin_bin' 
+        ) 
+    }
+    classpath {
+        containers  'org.jetbrains.kotlin.core.KOTLIN_CONTAINER'
+    }
+    jdt.file.withProperties {
+        it['org.eclipse.jdt.core.formatter.lineSplit'] = '200'
+        it['org.eclipse.jdt.core.formatter.comment.line_length'] = '120'
+        it['org.eclipse.jdt.core.formatter.tabulation.char'] = 'space'
+        it['org.eclipse.jdt.core.formatter.tabulation.size'] = '4'
+        it['org.eclipse.jdt.core.formatter.join_wrapped_lines'] = 'false'
+        it['org.eclipse.jdt.core.compiler.problem.missingOverrideAnnotation'] = 'warning'
+    }
+}
+
+jmhReport {
+    jmhResultPath = project.file('build/reports/jmh/result.json')
+    jmhReportOutput = project.file('build/reports/jmh')
+}
+
+tasks.jmh.finalizedBy tasks.jmhReport 
+
