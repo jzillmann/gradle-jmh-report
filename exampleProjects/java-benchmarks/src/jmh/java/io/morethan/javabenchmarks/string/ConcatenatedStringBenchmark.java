@@ -15,9 +15,9 @@ import org.openjdk.jmh.annotations.Scope;
 import org.openjdk.jmh.annotations.State;
 import org.openjdk.jmh.annotations.Warmup;
 
-@Fork(value = 2)
-@Warmup(iterations = 3)
-@Measurement(iterations = 10)
+@Fork(value = 5)
+@Warmup(iterations = 10)
+@Measurement(iterations = 20)
 @BenchmarkMode(Mode.Throughput)
 @State(Scope.Benchmark)
 @OutputTimeUnit(TimeUnit.MILLISECONDS)
@@ -54,6 +54,15 @@ public class ConcatenatedStringBenchmark {
         String result = "";
         for (String string : _strings) {
             result += string;
+        }
+        return validate(result);
+    }
+
+    @Benchmark
+    public String concat() {
+        String result = "";
+        for (String string : _strings) {
+            result = result.concat(string);
         }
         return validate(result);
     }
