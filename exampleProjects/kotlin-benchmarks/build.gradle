@@ -11,7 +11,7 @@ buildscript {
         }
     }
     dependencies {
-        classpath 'io.morethan:gradle-jmh-report:0.8.0'
+        classpath 'io.morethan:gradle-jmh-report:0.9.0'
         classpath "org.jetbrains.kotlin:kotlin-gradle-plugin:$kotlin_version"
         
         //transitive dependencies since we grep the plugin from build/libs
