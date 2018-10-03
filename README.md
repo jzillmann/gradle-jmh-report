@@ -62,9 +62,9 @@ jmhReport {
   - Increase version in _gradle.properties_
   - Update _News_ and _Getting Started_ in _README.md_
   - Update version number of in build.gradle for all example projects
-  - Test report: `gw jar ;gw  jmh -p exampleProjects/java-benchmarks/ -Pinclude=".*QuickBenchmark.*"`
+  - Test report: `./gradlew jar ;./gradlew  jmh -p exampleProjects/java-benchmarks/ -Pinclude=".*QuickBenchmark.*"`
   - Commit & Push
   - tag with
     - `git tag -a $releaseVersion -m "$releaseVersion release"`
     - `git push --tags`
-  - Execute: _./gradlew publishPlugins_
+  - Execute: `./gradlew publishPlugins`
