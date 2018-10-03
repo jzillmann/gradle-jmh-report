@@ -51,19 +51,19 @@ jmhReport {
 ![screenshot](https://cloud.githubusercontent.com/assets/148472/26032319/ace91322-3890-11e7-9d0e-7314020a8953.png)
 
 
-## Building the plugin
-- Prepare the project for import into Eclipse: _./gradlew cleanEclipse eclipse_
-- Execute the examples: _./gradlew jar ;./gradlew -p exampleProjects/java-benchmarks/ jmh_
+## Project Build
+- Prepare the project for import into Eclipse: `./gradlew cleanEclipse eclipse`
+- Execute the examples: `./gradlew jar ;./gradlew -p exampleProjects/java-benchmarks/ jmh`
 - How to publish the Gradle plugin:
   - (Optional) Integrate new version of https://github.com/jzillmann/jmh-visualizer
-    - npm run providedZip
-    - mv jmh-visualizer.zip ../../eclipse/gradle-jmh-report/src/main/resources/
+    - `npm run providedZip`
+    - `mv jmh-visualizer.zip ../../eclipse/gradle-jmh-report/src/main/resources/`
   - Increase version in _gradle.properties_
   - Update _News_ and _Getting Started_ in _README.md_
   - Update version number of in build.gradle for all example projects
-  - Test report: ```gw jar ;gw  jmh -p exampleProjects/java-benchmarks/ -Pinclude=".*QuickBenchmark.*"```
+  - Test report: `gw jar ;gw  jmh -p exampleProjects/java-benchmarks/ -Pinclude=".*QuickBenchmark.*"`
   - Commit & Push
   - tag with
-    - _git tag -a $releaseVersion -m "$releaseVersion release"_
-    - _git push --tags_
+    - `git tag -a $releaseVersion -m "$releaseVersion release"`
+    - `git push --tags`
   - Execute: _./gradlew publishPlugins_
