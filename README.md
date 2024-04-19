@@ -7,6 +7,7 @@
 
 ## News
 
+- 2024/04/19 - 0.9.6 Release - On pair with jmh-visualizer-0.9.6 / Couple of bug fixes
 - 2018/10/03 - 0.9.0 Release - On pair with jmh-visualizer-0.9.1 / [Couple of smaller features](https://github.com/jzillmann/jmh-visualizer/milestone/6?closed=1)
 - 2018/07/29 - 0.8.0 Release - On pair with jmh-visualizer-0.8.2 / Technical update, minor bug fixes
 - 2017/10/31 - 0.7.0 Release - On pair with jmh-visualizer-0.7 / Multi Run Support
