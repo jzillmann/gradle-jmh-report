@@ -85,6 +85,6 @@ pluginBundle {
 // special wrapper setup for having the sources in eclipse
 task wrapper(type: Wrapper) {
     gradleVersion = '3.5'
-    distributionUrl = "http://services.gradle.org/distributions/gradle-${gradleVersion}-all.zip"
+    distributionUrl = "https://services.gradle.org/distributions/gradle-${gradleVersion}-all.zip"
 }
 
